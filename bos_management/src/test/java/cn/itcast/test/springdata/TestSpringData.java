@@ -67,8 +67,8 @@ public class TestSpringData {
 		System.out.println("ddf");
 	}
 	
-	public void tet22(){
-		System.out.println("55");
+	public void test66(){
+		System.out.println("sdf");
 	}
 	
 }
