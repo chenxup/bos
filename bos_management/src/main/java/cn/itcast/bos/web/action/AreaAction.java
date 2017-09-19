@@ -60,12 +60,19 @@ public class AreaAction extends BaseAction<Area> {
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(new FileInputStream(file));
 		// 获得第一个sheet
 		HSSFSheet sheetAt = hssfWorkbook.getSheetAt(0);
+		int j = 0;
+		List<Area> list = new ArrayList<Area>();
+		
 		// 遍历sheet
 		for (Row row : sheetAt) {
 			// 获得每一个单元格
 			// 获得区域编号
 			if (row.getRowNum() == 0) {
 				continue;
+			}
+			if (j % 50 == 0) {
+				areaService.save(list);
+				list.clear();
 			}
 
 			Cell c1 = row.getCell(0);
@@ -83,11 +90,12 @@ public class AreaAction extends BaseAction<Area> {
 			Cell c5 = row.getCell(4);
 			String postcode = c5.getStringCellValue();
 			//封装到area中
-			this.model.setCity(city);
-			this.model.setId(id);
-			this.model.setProvince(province);
-			this.model.setDistrict(district);
-			this.model.setPostcode(postcode);
+			Area area = new Area();
+			area.setCity(city);
+			area.setId(id);
+			area.setProvince(province);
+			area.setDistrict(district);
+			area.setPostcode(postcode);
 			
 			// 去掉最后一位
 			province = province.substring(0, province.length() - 1);
@@ -101,11 +109,13 @@ public class AreaAction extends BaseAction<Area> {
 			//城市编码
 			String citycode = PinYin4jUtils.hanziToPinyin(city, "");
 			//封装
-			this.model.setShortcode(shortcode);
-			this.model.setCitycode(citycode);
-			areaService.save(this.model);
+			area.setShortcode(shortcode);
+			area.setCitycode(citycode);
+			list.add(area);
+			j++;
 		}
-
+		
+		areaService.save(list);
 		long end = System.currentTimeMillis();
 		System.out.println((end-start)/1000);
 		return NONE;

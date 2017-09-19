@@ -32,7 +32,38 @@
 			}
 			
 			function doAssociations(){
-				$('#customerWindow').window('open');
+				var rows = $("#grid").datagrid('getSelections');
+				if (rows.length != 1) {
+					$.messager.alert("警告", "你必须选择一项","warning");
+				}else {
+					//将定区id放到隐藏域中
+					$("#customerFixedAreaId").val(rows[0].id);
+					//使用进度条
+					$.messager.progress({
+						interval : 500
+					});
+					
+					//加载所有未关联到定区的客户
+					$.post("../../fixedArea_noassociationCustomer.action", function(data){
+						$("#noassociationSelect").empty();
+						$(data).each(function(){
+							$("#noassociationSelect").append("<option value="+this.id+">"+this.username+'('+this.address+')'+"</option>");
+						});
+					});
+					
+					//加载所有关联到定区的客户
+					$.post("../../fixedArea_associationCustomer.action",{"id":rows[0].id}, function(data){
+						$("#associationSelect").empty();
+						$(data).each(function(){
+							$("#associationSelect").append("<option value="+this.id+">"+this.username+'('+this.address+')'+"</option>");
+						});
+					});
+					//加载完成关闭进度条
+					$.messager.progress('close');
+					
+					$('#customerWindow').window('open');
+				}
+				
 			}
 			
 			//工具栏
@@ -72,6 +103,8 @@
 						// 只选择了一个定区
 						// 弹出定区关联快递员 窗口 
 						$("#courierWindow").window('open');
+						//将此定区的id放到隐藏域中
+						$("#courierFixedAreaId").val(rows[0].id);
 					}else{
 						// 没有选中定区，或者选择 了多个定区
 						$.messager.alert("警告","关联快递员,只能（必须）选择一个定区","warning");
@@ -167,14 +200,13 @@
 			    });
 			});
 		
-			function doDblClickRow(){
-				alert("双击表格数据...");
+			function doDblClickRow(index, row){
 				$('#association_subarea').datagrid( {
 					fit : true,
 					border : true,
 					rownumbers : true,
 					striped : true,
-					url : "../../data/association_subarea.json",
+					url : "../../data/association_subarea.json?id=",
 					columns : [ [{
 						field : 'id',
 						title : '分拣编号',
@@ -268,7 +300,7 @@
 					border : true,
 					rownumbers : true,
 					striped : true,
-					url : "../../data/courier.json",
+					url : "../../fixedArea_findAssoictionToFixedArea.action?fixedAreaId="+row.id,
 					columns : [[{
 						field : 'id',
 						title : '编号',
@@ -344,6 +376,14 @@
 			    	 $("#searchWindow").window("close");
 			     });
 			})
+			
+			$(function(){
+				$("#associationBtn").click(function(){
+					//将关联到定区的选中
+					$("#associationSelect option").prop("selected",true);
+					$("#customerForm").submit();
+				});
+			});
 		</script>
 	</head>
 
@@ -508,6 +548,15 @@
 						</tr>
 					</table>
 				</form>
+				<script type="text/javascript">
+					$(function(){
+						$("#associationCourierBtn").click(function(){
+							if ($("#courierForm").form("validate")){
+								$("#courierForm").submit();
+							}
+						});
+					})
+				</script>
 			</div>
 		</div>
 	</body>

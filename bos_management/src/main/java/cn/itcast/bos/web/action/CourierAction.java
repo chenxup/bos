@@ -1,6 +1,7 @@
 package cn.itcast.bos.web.action;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -105,5 +106,34 @@ public class CourierAction extends BaseAction<Courier> {
 		courierService.delBatch(ids);
 		return SUCCESS;
 	}
+	
+	/**
+	 * 查询所有为未废除且未关联到定区的取派员
+	 */
+	@Action(value="courier_findnoassociation", results={@Result(type="json")})
+	public String findnoassociation() throws Exception {
+		List<Courier> list = courierService.findnoassociation();
+		this.push(list);
+		return SUCCESS;
+	}
+	
+	
+	private String fixedAreaId;
+	public void setFixedAreaId(String fixedAreaId) {
+		this.fixedAreaId = fixedAreaId;
+	}
+	
+	/**
+	 * 查询所有关联到指定定区的去取派员
+	 * @return
+	 * @throws Exception
+	 */
+	@Action(value="fixedArea_findAssoictionToFixedArea", results={@Result(type="json")})
+	public String findAssoictionToFixedArea() throws Exception {
+		List<Courier> list = courierService.findAssoictionToFixedArea(fixedAreaId);
+		this.push(list);
+		return SUCCESS;
+	}
+	
 
 }

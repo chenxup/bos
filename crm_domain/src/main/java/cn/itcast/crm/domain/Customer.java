@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @description:客户信息表 
@@ -16,11 +17,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "T_CUSTOMER")
+@XmlRootElement(name="customer")
 public class Customer {
 	@Id
 	@GeneratedValue()
 	@Column(name = "C_ID")
-	private int id; // 主键id
+	private Integer id; // 主键id
 	@Column(name = "C_USERNAME")
 	private String username; // 用户名
 	@Column(name = "C_PASSWORD")
@@ -48,12 +50,15 @@ public class Customer {
 	private String email; // 邮箱
 	@Column(name = "C_Fixed_AREA_ID")
 	private String fixedAreaId; // 定区编码
+	
 
-	public int getId() {
+	
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

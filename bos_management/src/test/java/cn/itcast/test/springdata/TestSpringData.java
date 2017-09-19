@@ -63,12 +63,5 @@ public class TestSpringData {
 		System.out.println(list);
 	}
 	
-	public static void main(String[] args) {
-		System.out.println("ddf");
-	}
-	
-	public void test66(){
-		System.out.println("sdf");
-	}
 	
 }

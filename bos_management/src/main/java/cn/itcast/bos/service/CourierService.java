@@ -1,5 +1,6 @@
 package cn.itcast.bos.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -15,5 +16,9 @@ public interface CourierService {
 	void delBatch(String ids);
 
 	Page<Courier> pageQuery(Specification<Courier> spec, PageRequest pageRquest);
+
+	List<Courier> findnoassociation();
+
+	List<Courier> findAssoictionToFixedArea(String fixedAreaId);
 
 }
