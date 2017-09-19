@@ -1,15 +1,9 @@
 package cn.itcast.bos.web.action;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.ws.rs.core.MediaType;
-
+import cn.itcast.bos.domain.base.FixedArea;
+import cn.itcast.bos.service.FixedAreaService;
+import cn.itcast.bos.utils.Constants;
+import cn.itcast.crm.domain.Customer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.struts2.convention.annotation.Action;
@@ -22,11 +16,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 
-import cn.itcast.bos.domain.base.Courier;
-import cn.itcast.bos.domain.base.FixedArea;
-import cn.itcast.bos.service.FixedAreaService;
-import cn.itcast.bos.utils.Constants;
-import cn.itcast.crm.domain.Customer;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @ParentPackage(value="json-default")
 @Namespace("/")
