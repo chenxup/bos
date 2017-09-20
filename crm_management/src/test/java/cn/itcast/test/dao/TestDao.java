@@ -28,10 +28,21 @@ public class TestDao {
 		List<Customer> list = customerService.findAllHasAssociationCustomer("p001");
 		System.out.println(list);
 	}
-	
+
+
 	@Test
 	public void test3() throws Exception {
 		customerService.assvictionCustomerToFixedArea("10001,10005", "p002");
+
 	}
-	
+	@Test
+	public void test4() throws Exception {
+		Customer customer = customerService.rstelephone("13513283278");
+		System.out.println(customer);
+	}
+
+	@Test
+	public void test5() throws Exception {
+		customerService.updateMailType("13262809661");
+	}
 }
