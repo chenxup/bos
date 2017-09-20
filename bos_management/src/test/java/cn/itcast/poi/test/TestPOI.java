@@ -10,7 +10,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.junit.Test;
 
-import cn.itcast.bos.utils.PinYin4jUtils;
+import utils.PinYin4jUtils;
 
 public class TestPOI {
 

@@ -18,5 +18,7 @@
 
 	<!-- 加载properties文件 -->
 	<!-- <context:property-placeholder location="classpath:config.properties" /> -->
-	
+	<import resource="classpath:applicationContext-jedis.xml"/>
+
+
 </beans>

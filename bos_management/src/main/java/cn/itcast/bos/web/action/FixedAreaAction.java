@@ -2,7 +2,7 @@ package cn.itcast.bos.web.action;
 
 import cn.itcast.bos.domain.base.FixedArea;
 import cn.itcast.bos.service.FixedAreaService;
-import cn.itcast.bos.utils.Constants;
+import utils.Constants;
 import cn.itcast.crm.domain.Customer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.jaxrs.client.WebClient;

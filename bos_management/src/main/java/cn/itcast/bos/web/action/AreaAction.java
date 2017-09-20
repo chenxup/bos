@@ -27,7 +27,7 @@ import org.springframework.stereotype.Controller;
 
 import cn.itcast.bos.domain.base.Area;
 import cn.itcast.bos.service.AreaService;
-import cn.itcast.bos.utils.PinYin4jUtils;
+import utils.PinYin4jUtils;
 
 /**
  * 取派标准
