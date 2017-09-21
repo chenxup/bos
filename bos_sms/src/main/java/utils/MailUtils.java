@@ -12,7 +12,7 @@ public class MailUtils {
     private static String username = "15556859588@163.com";    //邮箱
     private static String password = "592828";        //授权码（登录邮箱-->设置-->邮箱安全设置-->客户端授权密码），这里不是邮箱的密码，切记！
     private static String from = "15556859588@163.com";        //来源邮箱，使用当前账号
-    public static String activeUrl = Constants.BOS_FORE_HOST + "/customer_activeMail";        //激活地址
+    public static String activeUrl = Constants.BOS_FORE_HOST + "/customer_activeMail.action";        //激活地址
 
     public static void sendMail(String subject, String content, String to,
                                 String activecode) {

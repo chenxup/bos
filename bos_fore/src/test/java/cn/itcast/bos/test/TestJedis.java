@@ -11,7 +11,7 @@ import redis.clients.jedis.Jedis;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext.xml")
+@ContextConfiguration("classpath:applicationContext-jedis.xml")
 public class TestJedis {
 
     @Autowired
@@ -31,4 +31,6 @@ public class TestJedis {
         String name = (String) redisTemplate.opsForValue().get("username");
         System.out.println(name);
     }
+
+
 }

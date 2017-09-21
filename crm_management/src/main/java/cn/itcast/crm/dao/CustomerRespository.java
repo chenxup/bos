@@ -24,6 +24,7 @@ public interface CustomerRespository extends JpaRepository<Customer, Integer>{
 	@Modifying
 	void assvictionCustomerToFixedArea(Integer id, String fixedAreaId);
 
+	
 	Customer findByTelephone(String phone);
 
 	@Query("update Customer c set c.type=1 where c.telephone=?")

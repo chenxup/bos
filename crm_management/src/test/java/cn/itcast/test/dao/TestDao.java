@@ -1,15 +1,14 @@
 package cn.itcast.test.dao;
 
-import java.util.List;
-
+import cn.itcast.crm.domain.Customer;
+import cn.itcast.crm.service.CustomerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cn.itcast.crm.domain.Customer;
-import cn.itcast.crm.service.CustomerService;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
@@ -37,7 +36,7 @@ public class TestDao {
 	}
 	@Test
 	public void test4() throws Exception {
-		Customer customer = customerService.rstelephone("13513283278");
+		Customer customer = customerService.rstelephone("13262809661");
 		System.out.println(customer);
 	}
 

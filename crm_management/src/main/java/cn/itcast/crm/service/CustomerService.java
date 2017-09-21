@@ -1,11 +1,9 @@
 package cn.itcast.crm.service;
 
-import java.util.List;
+import cn.itcast.crm.domain.Customer;
 
 import javax.ws.rs.*;
-
-import cn.itcast.crm.domain.Customer;
-import org.springframework.web.bind.annotation.PathVariable;
+import java.util.List;
 
 @Produces("*/*")
 public interface CustomerService {
@@ -38,12 +36,12 @@ public interface CustomerService {
     @Path("/rstelephone/{telephone}")
     @Produces({"application/xml", "application/json"})
     @Consumes({"application/xml", "application/json"})
-    Customer rstelephone(@PathVariable("telephone") String telephone);
+    Customer rstelephone(@PathParam("telephone") String telephone);
 
     //更新邮箱操作
     @PUT
     @Path("updateMailType/{telephone}")
     @Consumes({"application/xml", "application/json"})
-    void updateMailType(@PathVariable("telephone") String telephone);
+    void updateMailType(@PathParam("telephone") String telephone);
 
 }
