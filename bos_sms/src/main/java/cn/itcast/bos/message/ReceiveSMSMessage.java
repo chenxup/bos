@@ -1,12 +1,14 @@
 package cn.itcast.bos.message;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import org.springframework.stereotype.Component;
 import utils.SmsDemoUtils;
 
 import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
+@Component("receiveSMSMessage")
 public class ReceiveSMSMessage implements MessageListener {
     @Override
     public void onMessage(Message message) {

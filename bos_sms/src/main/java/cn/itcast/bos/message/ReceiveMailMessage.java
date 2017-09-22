@@ -1,29 +1,22 @@
 package cn.itcast.bos.message;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
 import utils.MailUtils;
 
 import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
+@Component("receiveMailMessage")
 public class ReceiveMailMessage implements MessageListener{
     //发送邮件
-
-    //@Resource(name="simpleMailMessage")
+    @Autowired
     private SimpleMailMessage simpleMailMessage;
-
-    public void setSimpleMailMessage(SimpleMailMessage simpleMailMessage) {
-        this.simpleMailMessage = simpleMailMessage;
-    }
-
-    // @Resource(name="javaMailSender")
+    @Autowired
     private JavaMailSender javaMailSender;
-
-    public void setJavaMailSender(JavaMailSender javaMailSender) {
-        this.javaMailSender = javaMailSender;
-    }
 
     @Override
     public void onMessage(Message message) {

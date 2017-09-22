@@ -25,46 +25,23 @@
     </bean>
     <!-- Spring用于管理真正的ConnectionFactory的ConnectionFactory -->
     <bean id="connectionFactory"
-          class="org.springframework.jms.connection.SingleConnectionFactory">
+          class="org.springframework.jms.connection.CachingConnectionFactory">
         <!-- 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory -->
         <property name="targetConnectionFactory" ref="targetConnectionFactory" />
     </bean>
 
 
-    <!--这个是队列目的地，一对一的 -->
-    <bean id="queueDestination-rsSms" class="org.apache.activemq.command.ActiveMQQueue">
-        <constructor-arg value="sendSms" />
-    </bean>
+    <!--destination-type:接受消息的类型，container-type:默认
+        acknowledge:消息应答模式为自动应答。
+    -->
+    <jms:listener-container destination-type="queue" container-type="default" connection-factory="connectionFactory" acknowledge="auto">
+        <!--destination:对应生产者的名称
+            ref:对应监听者的实体类。
+        -->
+        <jms:listener destination="sendSms" ref="receiveSMSMessage"/>
+        <jms:listener destination="sendMail" ref="receiveMailMessage"/>
+    </jms:listener-container>
 
-    <!--接受短信-->
-    <!-- 接收消息 -->
-    <!-- 配置监听器 -->
-    <bean id="receiveSMSMessage" class="cn.itcast.bos.message.ReceiveSMSMessage"/>
-    <!-- 消息监听容器 -->
-    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-        <property name="connectionFactory" ref="connectionFactory" />
-        <property name="destination" ref="queueDestination-rsSms" />
-        <property name="messageListener" ref="receiveSMSMessage" />
-    </bean>
-
-
-
-    <!--接受邮件-->
-    <bean id="queueDestination-rsMail" class="org.apache.activemq.command.ActiveMQQueue">
-        <constructor-arg value="sendMail" />
-    </bean>
-    <!-- 接收消息 -->
-    <!-- 配置监听器 -->
-    <bean id="receiveMailMessage" class="cn.itcast.bos.message.ReceiveMailMessage">
-        <property name="simpleMailMessage" ref="simpleMailMessage"></property>
-        <property name="javaMailSender" ref="javaMailSender"></property>
-    </bean>
-    <!-- 消息监听容器 -->
-    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-        <property name="connectionFactory" ref="connectionFactory" />
-        <property name="destination" ref="queueDestination-rsMail" />
-        <property name="messageListener" ref="receiveMailMessage" />
-    </bean>
 
 
 

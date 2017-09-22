@@ -19,6 +19,8 @@
 		http://activemq.apache.org/schema/core
         http://activemq.apache.org/schema/core/activemq-core-5.8.0.xsd ">
 
+    <context:component-scan base-package="cn.itcast.bos"/>
+
     <import resource="classpath:applicationContext-mail.xml"/>
     <import resource="classpath:applicationContext-jms.xml"/>
 
