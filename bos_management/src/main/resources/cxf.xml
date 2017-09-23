@@ -5,9 +5,9 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
-	<jaxrs:server id="customerService" address="/customerService" >
+	<jaxrs:server id="promotionServices" address="/promotionServices" >
 		<jaxrs:serviceBeans>
-			<bean class="cn.itcast.crm.service.impl.CustomerServiceImpl" />
+			<bean class="cn.itcast.bos.service.impl.PromotionServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:inInterceptors>
 			<bean class="org.apache.cxf.interceptor.LoggingInInterceptor" />
