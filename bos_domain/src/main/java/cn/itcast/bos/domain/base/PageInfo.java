@@ -1,10 +1,11 @@
 package cn.itcast.bos.domain.base;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 @XmlRootElement(name="pageinfo")
+@XmlSeeAlso({Promotion.class})
 public class PageInfo<T> {
 	
 	private Long totalCount;

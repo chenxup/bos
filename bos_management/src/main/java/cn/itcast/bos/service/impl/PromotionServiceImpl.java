@@ -1,15 +1,14 @@
 package cn.itcast.bos.service.impl;
 
+import cn.itcast.bos.dao.PromotionRepository;
+import cn.itcast.bos.domain.base.PageInfo;
+import cn.itcast.bos.domain.base.Promotion;
+import cn.itcast.bos.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import cn.itcast.bos.dao.PromotionRepository;
-import cn.itcast.bos.domain.base.PageInfo;
-import cn.itcast.bos.domain.base.Promotion;
-import cn.itcast.bos.service.PromotionService;
 
 @Service
 @Transactional
