@@ -8,7 +8,7 @@ package utils;
  */
 public class Constants {
 
-	public static final String BOS_MANAGEMENT_HOST = "http://localhost:9999";
+	public static final String BOS_MANAGEMENT_HOST = "http://localhost:8080";
 	public static final String CRM_MANAGEMENT_HOST = "http://localhost:9999";
 	public static final String BOS_FORE_HOST = "http://localhost:8083";
 	public static final String BOS_SMS_HOST = "http://localhost:9999";

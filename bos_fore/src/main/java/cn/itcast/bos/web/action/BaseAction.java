@@ -21,6 +21,13 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 	private int page;
 	private int rows;
 	
+	public int getRows() {
+		return rows;
+	}
+	public int getPage() {
+		return page;
+	}
+	
 	public PageRequest getPageRquest() {
 		return new PageRequest(page-1, rows);
 	}

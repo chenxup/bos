@@ -35,6 +35,8 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 		this.rows = rows;
 	}
 	
+
+	
 	public BaseAction() {
 		//获得当前实例的泛型
 		ParameterizedType parameterizedType = (ParameterizedType) this.getClass().getGenericSuperclass();

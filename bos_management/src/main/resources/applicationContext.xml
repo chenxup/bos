@@ -77,5 +77,5 @@
 	<!-- 扫描dao接口 -->
 	<jpa:repositories base-package="cn.itcast.bos.dao"></jpa:repositories>
 
-
+	<import resource="classpath:cxf.xml"/>
 </beans>
