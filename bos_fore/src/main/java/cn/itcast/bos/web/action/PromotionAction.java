@@ -18,16 +18,17 @@ import javax.ws.rs.core.MediaType;
 @Controller
 @Scope("prototype")
 public class PromotionAction extends BaseAction<Promotion> {
-	
-	@Action(value="promotionAction_contentPageQuery", results={@Result(type="json")})
+
+	@Action(value = "promotionAction_contentPageQuery", results = { @Result(type = "json") })
 	public String contentPageQuery() throws Exception {
-		//调用远程服务
-		PageInfo pageInfo = WebClient.create(Constants.BOS_MANAGEMENT_HOST+"/services/promotion/pageQuery?page="+this.getPage()+"&size="+this.getRows())
-			.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).get(PageInfo.class);
-		
-		//封装数据
+
+		PageInfo<Promotion> pageInfo = WebClient.create(Constants.BOS_MANAGEMENT_HOST
+				+ "/services/promotion/pageQuery?page=" + this.getPage() + "&size=" + this.getRows())
+				.accept(MediaType.APPLICATION_JSON).get(PageInfo.class);
+
+		// 封装数据
 		this.push(pageInfo);
 		return SUCCESS;
 	}
-	
+
 }

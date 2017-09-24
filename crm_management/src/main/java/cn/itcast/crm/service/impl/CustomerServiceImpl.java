@@ -52,4 +52,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public void updateMailType(String telephone) {
 		customerRespository.updateTypeByTelephone(telephone);
 	}
+
+	@Override
+	public Customer login(String username) {
+		return customerRespository.findByUsername(username);
+	}
 }

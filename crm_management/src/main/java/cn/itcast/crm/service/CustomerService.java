@@ -3,6 +3,8 @@ package cn.itcast.crm.service;
 import cn.itcast.crm.domain.Customer;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
 import java.util.List;
 
 @Produces("*/*")
@@ -43,5 +45,12 @@ public interface CustomerService {
     @Path("updateMailType/{telephone}")
     @Consumes({"application/xml", "application/json"})
     void updateMailType(@PathParam("telephone") String telephone);
+    
+    //根据用户名查询
+    @GET
+    @Path("login/{username}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    Customer login(@PathParam("username") String username);
 
 }

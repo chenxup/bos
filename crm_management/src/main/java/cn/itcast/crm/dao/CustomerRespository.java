@@ -30,4 +30,6 @@ public interface CustomerRespository extends JpaRepository<Customer, Integer>{
 	@Query("update Customer c set c.type=1 where c.telephone=?")
 	@Modifying
 	void updateTypeByTelephone(String telephone);
+
+	Customer findByUsername(String username);
 }

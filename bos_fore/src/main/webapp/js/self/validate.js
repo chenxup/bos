@@ -9,7 +9,7 @@ validationApp.controller('mainController', function($scope) {
 
 		// check to make sure the form is completely valid
 		if(isValid) {
-			alert('表单提交成功');
+			
 		}
 
 	};

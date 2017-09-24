@@ -14,7 +14,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.bos.dao.StandardRespository;
+import cn.itcast.bos.domain.base.Promotion;
 import cn.itcast.bos.domain.base.Standard;
+import cn.itcast.bos.service.PromotionService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext.xml")
@@ -22,6 +24,9 @@ public class TestSpringData {
 
 	@Autowired
 	private StandardRespository standardRespository;
+	
+	@Autowired
+	private PromotionService promotionService;
 	
 	@Test
 	public void test1() throws Exception {
@@ -61,6 +66,13 @@ public class TestSpringData {
 		System.out.println("总记录数数：" + page.getTotalElements());
 		List<Standard> list = page.getContent();
 		System.out.println(list);
+	}
+	
+	@Test
+	public void test6() throws Exception {
+		List<Promotion> list = promotionService.findtest();
+		System.out.println(list);
+		
 	}
 	
 	

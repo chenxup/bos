@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 
-@XmlRootElement(name="pageinfo")
+@XmlRootElement(name="pageInfo")
 @XmlSeeAlso({Promotion.class})
 public class PageInfo<T> {
 	

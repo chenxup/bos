@@ -168,8 +168,11 @@
 					templateUrl: 'myhome.html'
 				}).when("/promotion", {
 					templateUrl: 'promotion.html'
-				}).when("/promotion_detail", {
-					templateUrl: 'promotion_detail.html'
+				}).when("/promotion_detail/:id", {
+					 templateUrl: function($routeParams){
+								return "http://localhost:8080/ftl/"+$routeParams.id+".html";
+								//return $routeParams.id+".html";
+						} 
 				}).otherwise({
 					redirectTo: '/'
 				})

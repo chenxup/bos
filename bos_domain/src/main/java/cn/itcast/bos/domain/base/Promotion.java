@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -19,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Promotion implements Serializable {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "C_ID")
 	private Integer id;
 	@Column(name = "C_TITLE")
@@ -60,6 +61,9 @@ public class Promotion implements Serializable {
 	}
 
 	public String getTitleImg() {
+		if (!titleImg.startsWith("http://localhost:8080")){
+			return "http://localhost:8080"+titleImg;
+		}
 		return titleImg;
 	}
 

@@ -1,7 +1,19 @@
 package cn.itcast.bos.web.action;
 
-import cn.itcast.crm.domain.Customer;
+import java.util.concurrent.TimeUnit;
+
+import javax.annotation.Resource;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.MapMessage;
+import javax.jms.Message;
+import javax.jms.Session;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.MediaType;
+
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -16,15 +28,10 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
+
+import cn.itcast.crm.domain.Customer;
 import utils.Constants;
 import utils.GetRandomcode;
-
-import javax.annotation.Resource;
-import javax.jms.*;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.MediaType;
-import java.util.concurrent.TimeUnit;
 
 @ParentPackage("json-default")
 @Namespace("/")
@@ -174,8 +181,43 @@ public class CustomerAction extends BaseAction<Customer> {
         } else {
             response.getWriter().write("邮箱已经绑定！，请勿重复操作");
         }
-
-
         return NONE;
     }
+    
+    @Action(value="customerAction_login", results={@Result(name="success", type="redirect", location="./#/myhome")
+    	,@Result(name="input", type="redirect", location="./login.html") })
+    public String login() throws Exception {
+    	//验证用户名和密码是否为空
+    	if (StringUtils.isBlank(this.model.getUsername())) {
+    		return INPUT;
+    	}
+    	if (StringUtils.isBlank(this.model.getPassword())) {
+    		return INPUT;
+    	}
+    	
+    	//调用crm系统
+    	Customer customer = WebClient.create(Constants.CRM_MANAGEMENT_HOST)
+    		.path("/services/customerService/login/" + this.model.getUsername())
+    		.accept(MediaType.APPLICATION_JSON)
+    		.type(MediaType.APPLICATION_JSON)
+    		.get(Customer.class);
+    	
+    	if (customer == null) {
+    		return INPUT;
+    	}
+    	
+    	//验证密码
+    	//将登录的密码进行MD5加密
+    	String password = DigestUtils.md5DigestAsHex(this.model.getPassword().getBytes());
+    	if (!password.equals(customer.getPassword())) {
+    		return INPUT;
+    	}
+    	
+    	//验证是否激活
+    	if (customer.getType() == 0) {
+    		return INPUT;
+    	}
+    	
+    	return SUCCESS;
+    };
 }

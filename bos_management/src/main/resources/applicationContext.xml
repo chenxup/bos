@@ -78,4 +78,5 @@
 	<jpa:repositories base-package="cn.itcast.bos.dao"></jpa:repositories>
 
 	<import resource="classpath:cxf.xml"/>
+	<import resource="classpath:applicationContext-quartz.xml"/>
 </beans>

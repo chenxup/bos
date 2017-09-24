@@ -5,7 +5,5 @@
     <artifactId>common_parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>cn.itcast</groupId>
   <artifactId>bos_domain</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
 </project>
