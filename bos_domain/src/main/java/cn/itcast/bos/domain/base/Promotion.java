@@ -18,7 +18,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "T_PROMOTION")
 @XmlRootElement(name="promotion")
 public class Promotion implements Serializable {
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "C_ID")

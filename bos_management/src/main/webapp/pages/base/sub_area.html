@@ -38,7 +38,7 @@
 			
 			function doImport(){
 				$("#button-import").upload({
-					name : "file", //默认就是file
+					name : "file", //默认就是file,可以省略不写。
 					action : "../../SubArea_impXls.action",
 					params: {
 						'rand': Math.random()  //防止缓存

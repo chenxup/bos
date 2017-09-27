@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+	</head>
+
+	<title></title>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/self/city-picker.data.js"></script>
+	<script src="../js/self/city-picker.js"></script>
+	<link rel="stylesheet" href="../css/city-picker.css" />
+	<script type="text/javascript">
+		$(function() {
+			$("#area").citypicker();
+			$("#setValue").click(function() {
+				// 执行赋值之前，需要执行reset和destroy的操作
+				$("#area").citypicker("reset");
+				$("#area").citypicker("destroy");
+				$('#area').citypicker({
+					province: '江苏省',
+					city: '常州市',
+					district: '溧阳市'
+				});
+			});
+		})
+	</script>
+
+	<body>
+		<div style="position: relative;">
+			<input readonly type="text" id="area" size="80">
+			<input type="button" value="赋值" id="setValue" />
+		</div>
+	</body>
+
+</html>
