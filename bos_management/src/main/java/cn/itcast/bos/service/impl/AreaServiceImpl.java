@@ -1,7 +1,8 @@
 package cn.itcast.bos.service.impl;
 
-import java.util.List;
-
+import cn.itcast.bos.dao.AreaRepository;
+import cn.itcast.bos.domain.base.Area;
+import cn.itcast.bos.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,9 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.itcast.bos.dao.AreaRepository;
-import cn.itcast.bos.domain.base.Area;
-import cn.itcast.bos.service.AreaService;
+import java.util.List;
 
 @Service
 @Transactional
@@ -42,6 +41,11 @@ public class AreaServiceImpl implements AreaService {
 	public Page<Area> pageQuery(Specification<Area> spec, Pageable pageable) {
 		return areaRepository.findAll(spec, pageable);
 	}
-	
-	
+
+    @Override
+    public Area findAreaByProvinceAndCityAndDistrict(String areaInfo) {
+        String[] info = areaInfo.split("/");
+        Area area = areaRepository.findAreaByProvinceAndCityAndDistrict(info[0], info[1], info[2]);
+        return area;
+    }
 }

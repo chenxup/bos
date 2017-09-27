@@ -5,16 +5,32 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
-	<jaxrs:server id="promotionService" address="/promotion" >
-		<jaxrs:serviceBeans>
-			<bean class="cn.itcast.bos.service.impl.PromotionServiceImpl" />
-		</jaxrs:serviceBeans>
-		<jaxrs:inInterceptors>
-			<bean class="org.apache.cxf.interceptor.LoggingInInterceptor" />
-		</jaxrs:inInterceptors>
-		<jaxrs:outInterceptors>
-			<bean class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
-		</jaxrs:outInterceptors>
-	</jaxrs:server>
+    <!--宣传任务-->
+    <jaxrs:server id="promotionService" address="/promotion" >
+        <jaxrs:serviceBeans>
+            <bean class="cn.itcast.bos.service.impl.PromotionServiceImpl" />
+        </jaxrs:serviceBeans>
+        <jaxrs:inInterceptors>
+            <bean class="org.apache.cxf.interceptor.LoggingInInterceptor" />
+        </jaxrs:inInterceptors>
+        <jaxrs:outInterceptors>
+            <bean class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
+        </jaxrs:outInterceptors>
+    </jaxrs:server>
+
+    <!--区域-->
+    <jaxrs:server id="orderService" address="/orderService" >
+        <jaxrs:serviceBeans>
+            <bean class="cn.itcast.bos.service.impl.OrderServiceImpl" />
+        </jaxrs:serviceBeans>
+        <jaxrs:inInterceptors>
+            <bean class="org.apache.cxf.interceptor.LoggingInInterceptor" />
+        </jaxrs:inInterceptors>
+        <jaxrs:outInterceptors>
+            <bean class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
+        </jaxrs:outInterceptors>
+    </jaxrs:server>
+
+
 	
 </beans>

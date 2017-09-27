@@ -1,17 +1,6 @@
 package cn.itcast.bos.web.action;
 
-import java.util.concurrent.TimeUnit;
-
-import javax.annotation.Resource;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.MapMessage;
-import javax.jms.Message;
-import javax.jms.Session;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.MediaType;
-
+import cn.itcast.crm.domain.Customer;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
@@ -28,10 +17,15 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
-
-import cn.itcast.crm.domain.Customer;
 import utils.Constants;
 import utils.GetRandomcode;
+
+import javax.annotation.Resource;
+import javax.jms.*;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.MediaType;
+import java.util.concurrent.TimeUnit;
 
 @ParentPackage("json-default")
 @Namespace("/")
@@ -183,7 +177,12 @@ public class CustomerAction extends BaseAction<Customer> {
         }
         return NONE;
     }
-    
+
+    /**
+     * 登录
+     * @return
+     * @throws Exception
+     */
     @Action(value="customerAction_login", results={@Result(name="success", type="redirect", location="./#/myhome")
     	,@Result(name="input", type="redirect", location="./login.html") })
     public String login() throws Exception {
@@ -217,7 +216,9 @@ public class CustomerAction extends BaseAction<Customer> {
     	if (customer.getType() == 0) {
     		return INPUT;
     	}
-    	
-    	return SUCCESS;
-    };
+
+    	//将用户放入session中
+        ServletActionContext.getRequest().getSession().setAttribute("logUser", customer);
+        return SUCCESS;
+    }
 }

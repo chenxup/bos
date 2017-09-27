@@ -16,5 +16,6 @@
 			<bean class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
 		</jaxrs:outInterceptors>
 	</jaxrs:server>
-	
+
+
 </beans>

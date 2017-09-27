@@ -52,4 +52,11 @@ public interface CustomerService {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     Customer login(@PathParam("username") String username);
 
+    //根据id地址查询定区id
+    @GET
+    @Path("/findFixedByIdAndAddress")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    String findFixedByIdAndAddress(@QueryParam("id") Integer id, @QueryParam("address") String address);
+
 }

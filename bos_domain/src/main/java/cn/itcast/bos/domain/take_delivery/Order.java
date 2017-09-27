@@ -1,27 +1,20 @@
 package cn.itcast.bos.domain.take_delivery;
 
+import cn.itcast.bos.domain.base.Area;
+import cn.itcast.bos.domain.base.Courier;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import cn.itcast.bos.domain.base.Area;
-import cn.itcast.bos.domain.base.Courier;
 
 /**
  * @description:订单实体类
  */
 @Entity
 @Table(name = "T_ORDER")
+@XmlRootElement(name="order")
 public class Order {
 	@Id
 	@GeneratedValue

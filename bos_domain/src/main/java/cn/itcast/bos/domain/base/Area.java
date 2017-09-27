@@ -1,15 +1,11 @@
 package cn.itcast.bos.domain.base;
 
+import org.apache.struts2.json.annotations.JSON;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import org.apache.struts2.json.annotations.JSON;
 
 
 /**
@@ -17,6 +13,7 @@ import org.apache.struts2.json.annotations.JSON;
  */
 @Entity
 @Table(name = "T_AREA")
+@XmlRootElement(name="area")
 public class Area {
 
 	@Id
