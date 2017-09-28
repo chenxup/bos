@@ -13,4 +13,6 @@ public interface OrderService {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_ATOM_XML})
     public void save(Order order);
 
+    Order findByOrderNum(String orderNum);
+
 }

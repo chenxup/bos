@@ -1,17 +1,14 @@
 package cn.itcast.bos.web.action;
 
-import java.lang.reflect.ParameterizedType;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
-import cn.itcast.bos.domain.base.Area;
+import java.lang.reflect.ParameterizedType;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 
@@ -34,10 +31,16 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
-	
 
-	
-	public BaseAction() {
+    public int getPage() {
+        return page;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public BaseAction() {
 		//获得当前实例的泛型
 		ParameterizedType parameterizedType = (ParameterizedType) this.getClass().getGenericSuperclass();
 		Class<?> clazz = (Class<?>) parameterizedType.getActualTypeArguments()[0];

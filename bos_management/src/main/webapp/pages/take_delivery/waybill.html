@@ -29,6 +29,64 @@
 						$('#orderForm').submit();
 					}
 				});
+
+				//订单的回显功能
+                $("#orderNum").blur(function () {
+                    $.post("../../order_findByOrderNum.action", {"orderNum":$("#orderNum").val()}, function (data) {
+                        if (data!=null){
+                            $("#waybillForm").form("load", data);
+                            //补全订单
+                            $("#orderId").val(data.id);
+                            $("#orderNum").val(data.orderNum);
+                            $("#courierCompany").val(data.courier.company);
+                            $("#courierName").val(data.courier.name);
+                        }else {
+                            //重置表单
+                            $("#waybillForm").get(0).reset();
+                        }
+
+                    });
+                });
+
+                //运单回显数据
+                $("#wayBillNum").blur(function () {
+                    $.post("../../wayBill_findByWayBillNum.action", {"wayBillNum":$("#wayBillNum").val()}, function (data) {
+                        if (data!=null){
+                            $("#waybillForm").form("load", data);
+                            //补全订单
+                            $("#courierCompany").val(data.order.courier.company);
+                            $("#courierName").val(data.order.courier.name);
+                        }
+
+                    });
+                });
+
+                //提交订单
+                $("#save").click(function () {
+                    //ajax提交表单
+                    $.post("../../wayBill_save.action", $("#waybillForm").serialize(), function (data) {
+                        if (data.success) {
+                            $.messager.show({
+                                title: '通知消息',
+                                msg: '运单保存成功。',
+                                timeout: 5000,
+                                showType: 'slide'
+                            });
+                        }else {
+                            $.messager.show({
+                                title: '通知消息',
+                                msg: '运单保存失败。',
+                                timeout: 5000,
+                                showType: 'slide'
+                            });
+                        }
+                    })
+
+                    //将表单设为空
+                    $("#waybillForm").get(0).reset();
+                    $("#orderId").val("");
+                    $("#id").val("");
+                });
 			});
 		</script>
 	</head>
@@ -81,9 +139,9 @@
 					</tr>
 					<tr>
 						<td>受理单位</td>
-						<td><input type="text" name="order.courier.company" required="true" /></td>
+						<td><input type="text" name="order.courier.company" id="courierCompany" required="true" /></td>
 						<td>快递员</td>
-						<td><input type="text" name="order.courier.name" required="true" /></td>
+						<td><input type="text" name="order.courier.name" id="courierName" required="true" /></td>
 					</tr>
 				</table>
 			</div>

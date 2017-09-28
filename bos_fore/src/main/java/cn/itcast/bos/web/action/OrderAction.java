@@ -9,6 +9,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import utils.Constants;
@@ -20,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 @Controller
 @Scope("prototype")
 public class OrderAction extends BaseAction<Order> {
+
 
     private String sendAreaInfo;
     private String recAreaInfo;
@@ -64,4 +66,5 @@ public class OrderAction extends BaseAction<Order> {
 
         return SUCCESS;
     }
+
 }

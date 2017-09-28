@@ -8,4 +8,6 @@ import cn.itcast.bos.domain.take_delivery.WayBill;
 public interface WayBillRepository extends JpaRepository<WayBill,Integer>,JpaSpecificationExecutor<WayBill> {
 
 
+    WayBill findByWayBillNum(String wayBillNum);
+
 }

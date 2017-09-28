@@ -8,4 +8,6 @@ import cn.itcast.bos.domain.take_delivery.Order;
 public interface OrderRepository extends JpaRepository<Order,Integer>,JpaSpecificationExecutor<Order> {
 
 
+    Order findByOrderNum(String orderNum);
+
 }

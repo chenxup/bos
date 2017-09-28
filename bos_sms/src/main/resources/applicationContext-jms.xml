@@ -40,6 +40,7 @@
         -->
         <jms:listener destination="sendSms" ref="receiveSMSMessage"/>
         <jms:listener destination="sendMail" ref="receiveMailMessage"/>
+        <jms:listener destination="sendSmsCourier" ref="receiveSMSMessageForCourier"/>
     </jms:listener-container>
 
 

@@ -146,4 +146,14 @@ public class OrderServiceImpl implements OrderService {
         workBill.setPickstate("已通知");
         workBillRepository.save(workBill);
     }
+
+    /**
+     * 根据订单号查询订单
+     * @param orderNum
+     * @return
+     */
+    @Override
+    public Order findByOrderNum(String orderNum) {
+        return orderRepository.findByOrderNum(orderNum);
+    }
 }

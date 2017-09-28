@@ -79,4 +79,5 @@
 
 	<import resource="classpath:cxf.xml"/>
 	<import resource="classpath:applicationContext-quartz.xml"/>
+    <import resource="classpath:applicationContext-jms.xml"/>
 </beans>

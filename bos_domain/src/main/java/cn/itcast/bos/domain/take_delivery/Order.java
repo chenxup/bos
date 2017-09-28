@@ -2,6 +2,7 @@ package cn.itcast.bos.domain.take_delivery;
 
 import cn.itcast.bos.domain.base.Area;
 import cn.itcast.bos.domain.base.Courier;
+import org.apache.struts2.json.annotations.JSON;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -251,6 +252,7 @@ public class Order {
 		this.wayBill = wayBill;
 	}
 
+	@JSON(serialize = false)
 	public Set<WorkBill> getWorkBills() {
 		return workBills;
 	}
