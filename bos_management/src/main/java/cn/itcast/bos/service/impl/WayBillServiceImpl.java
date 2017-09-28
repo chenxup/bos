@@ -33,6 +33,8 @@ public class WayBillServiceImpl implements WayBillService {
             if (model.getOrder() != null && model.getOrder().getId() == null) {
                 model.setOrder(null);
             }
+            //将运单设为待发货
+            model.setSignStatus(1); //1:代发货， 2：配送中
             //保存
             wayBillRepository.save(model);
             return;
@@ -40,6 +42,7 @@ public class WayBillServiceImpl implements WayBillService {
         //存在, 将值赋给查询查询到的对象中，order还是用原来的，不能改动
         Order order = wayBill.getOrder();
         BeanUtils.copyProperties(wayBill, model);
+        wayBill.setSignStatus(1);
         wayBill.setOrder(order);
     }
 
