@@ -34,7 +34,7 @@
         <!-- 注入cron表达式，通过这个表达式指定触发的时间点 -->
         <property name="cronExpression">
             <!-- 每个5秒触发一次 -->
-            <value>0/600 * * * * ?</value>
+            <value>0/600 * * * * ? 2018</value>
         </property>
     </bean>
     <!-- 配置调度工厂 -->

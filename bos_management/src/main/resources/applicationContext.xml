@@ -72,7 +72,7 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	
-	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 	
 	<!-- 扫描dao接口 -->
 	<jpa:repositories base-package="cn.itcast.bos.dao"></jpa:repositories>
@@ -80,4 +80,6 @@
 	<import resource="classpath:cxf.xml"/>
 	<import resource="classpath:applicationContext-quartz.xml"/>
     <import resource="classpath:applicationContext-jms.xml"/>
+    <import resource="classpath:applicationContext-elasticsearch.xml"/>
+    <import resource="classpath:applicationContext-shiro.xml"/>
 </beans>

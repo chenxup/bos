@@ -11,7 +11,7 @@ public interface WayBillService {
 
     void save(WayBill model) throws InvocationTargetException, IllegalAccessException, Exception;
 
-    Page<WayBill> pageQuery(PageRequest pageRquest);
+    Page<WayBill> pageQuery(WayBill model, PageRequest pageRquest);
 
     WayBill findByWayBillNum(String wayBillNum);
 

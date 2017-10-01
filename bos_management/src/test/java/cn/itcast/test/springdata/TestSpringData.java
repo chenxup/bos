@@ -1,5 +1,7 @@
 package cn.itcast.test.springdata;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -13,9 +15,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.itcast.bos.dao.PermissionRepository;
 import cn.itcast.bos.dao.StandardRespository;
+import cn.itcast.bos.dao.UserRepository;
 import cn.itcast.bos.domain.base.Promotion;
 import cn.itcast.bos.domain.base.Standard;
+import cn.itcast.bos.domain.system.Permission;
+import cn.itcast.bos.domain.system.User;
 import cn.itcast.bos.service.PromotionService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,6 +33,12 @@ public class TestSpringData {
 	
 	@Autowired
 	private PromotionService promotionService;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private PermissionRepository permissionRepository;
 	
 	@Test
 	public void test1() throws Exception {
@@ -70,10 +82,19 @@ public class TestSpringData {
 	
 	@Test
 	public void test6() throws Exception {
-		List<Promotion> list = promotionService.findtest();
-		System.out.println(list);
+		User user = userRepository.findByUsername("didiao");
+		System.out.println(user);
 		
 	}
+	
+	@Test
+	public void testName() throws Exception {
+		List<Permission> list = permissionRepository.findByUser(2001);
+		for (Permission permission : list) {
+			System.out.println(permission.getName());
+		}
+	}
+	
 	
 	
 }

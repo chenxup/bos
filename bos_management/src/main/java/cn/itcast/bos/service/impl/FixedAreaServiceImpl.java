@@ -2,6 +2,7 @@ package cn.itcast.bos.service.impl;
 
 import java.util.Date;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,6 +40,7 @@ public class FixedAreaServiceImpl implements FixedAreaService {
 	/**
 	 * 关联取派员
 	 */
+	@RequiresPermissions("region:list")
 	public void associationCourierToFixedArea(String id, String courierId, String takeTimeId) {
 		FixedArea fixedArea = fixedAreaRepository.findOne(id);
 		Courier courier = courierRepository.findOne(Integer.valueOf(courierId));

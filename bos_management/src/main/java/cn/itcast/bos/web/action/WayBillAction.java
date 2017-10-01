@@ -59,7 +59,8 @@ public class WayBillAction extends BaseAction<WayBill> {
     public String pageQuery() throws Exception {
         //根据id降序
         PageRequest pageable = new PageRequest(this.getPage() - 1, this.getRows(), new Sort(new Sort.Order(Sort.Direction.DESC, "id")));
-        Page<WayBill> page = wayBillService.pageQuery(pageable);
+        //封装查询条件
+        Page<WayBill> page = wayBillService.pageQuery(model,pageable);
         this.java2Json(page);
         return SUCCESS;
     }

@@ -6,6 +6,7 @@ import utils.Constants;
 import cn.itcast.crm.domain.Customer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -13,6 +14,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 
@@ -71,7 +73,8 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 				return query.getRestriction();
 			}
 		};
-		Page<FixedArea> page = fixedAreaService.pageQuery(spec, this.getPageRquest());
+		PageRequest pageRquest = this.getPageRquest();
+		Page<FixedArea> page = fixedAreaService.pageQuery(spec, pageRquest);
 		this.java2Json(page);
 		return SUCCESS;
 	}

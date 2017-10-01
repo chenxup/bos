@@ -7,5 +7,4 @@ import cn.itcast.bos.domain.take_delivery.WorkBill;
 
 public interface WorkBillRepository extends JpaRepository<WorkBill,Integer>,JpaSpecificationExecutor<WorkBill> {
 
-
 }
