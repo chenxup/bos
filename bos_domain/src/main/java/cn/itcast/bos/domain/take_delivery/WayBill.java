@@ -13,6 +13,8 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldIndex;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import cn.itcast.bos.domain.base.Area;
 
 /**
@@ -144,6 +146,7 @@ public class WayBill {
 		this.wayBillNum = wayBillNum;
 	}
 
+	@JsonIgnore
 	public Order getOrder() {
 		return order;
 	}

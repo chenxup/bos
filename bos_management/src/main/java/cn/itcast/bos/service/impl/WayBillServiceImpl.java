@@ -54,6 +54,9 @@ public class WayBillServiceImpl implements WayBillService {
             wayBillIndexRespository.save(model);
             return;
         }
+        if (wayBill.getSignStatus() != 1) {
+        	throw new RuntimeException("运单已经发出，无法修改保存");
+        }
         //存在, 将值赋给查询查询到的对象中，order还是用原来的，不能改动
         Order order = wayBill.getOrder();
         BeanUtils.copyProperties(wayBill, model);

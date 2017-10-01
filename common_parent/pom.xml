@@ -263,9 +263,9 @@
 			<artifactId>quartz-jobs</artifactId>
 			<version>2.2.3</version>
 		</dependency>
-		
+
 		<!-- 引入elasticsearch -->
-				<dependency>
+		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
 			<version>2.4.0</version>
@@ -276,7 +276,14 @@
 			<artifactId>spring-data-elasticsearch</artifactId>
 			<version>2.0.4.RELEASE</version>
 		</dependency>
-		
+		<!-- 导入eheache的缓存包 -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.6.11</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

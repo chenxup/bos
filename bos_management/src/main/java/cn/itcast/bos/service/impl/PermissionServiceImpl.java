@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.bos.dao.PermissionRepository;
+import cn.itcast.bos.domain.system.Menu;
 import cn.itcast.bos.domain.system.Permission;
 import cn.itcast.bos.domain.system.User;
 import cn.itcast.bos.service.PermissionService;
@@ -27,6 +28,16 @@ public class PermissionServiceImpl implements PermissionService {
 			return permissionRepository.findAll();
 		}
 		return permissionRepository.findByUser(user.getId());
+	}
+
+	@Override
+	public List<Permission> findAll() {
+		return permissionRepository.findAll();
+	}
+
+	@Override
+	public void save(Permission model) {
+		permissionRepository.save(model);
 	}
 
 }

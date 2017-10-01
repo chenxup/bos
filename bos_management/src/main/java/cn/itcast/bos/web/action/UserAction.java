@@ -1,6 +1,8 @@
 package cn.itcast.bos.web.action;
 
 
+import java.util.List;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import cn.itcast.bos.domain.system.Permission;
 import cn.itcast.bos.domain.system.User;
 import cn.itcast.bos.service.UserService;
 
@@ -93,6 +96,29 @@ public class UserAction extends BaseAction<User> {
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();
 		ServletActionContext.getRequest().getSession().removeAttribute("logUser");
+		return SUCCESS;
+	}
+	
+	/**
+	 * 查询所有
+	 * @return
+	 * @throws Exception
+	 */
+	@Action(value="user_list", results={@Result(type="json")})
+	public String list() throws Exception {
+		List<User> list = userService.findAll();
+		this.push(list);
+		return SUCCESS;
+	}
+	
+	private String[] roleIds;
+	public void setRoleIds(String[] roleIds) {
+		this.roleIds = roleIds;
+	}
+	
+	@Action(value="user_save", results={@Result(type="redirect", location="./pages/system/userlist.html")})
+	public String save() throws Exception {
+		userService.save(this.model, roleIds);
 		return SUCCESS;
 	}
 	

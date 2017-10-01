@@ -4,8 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ public class StandardServiceImpl implements StandardService {
 	/**
 	 * 保存
 	 */
+	@CacheEvict(value="standard", allEntries=true)
 	public void save(Standard standard) {
 		standard.setOperatingTime(new Date());
 		standardRespository.save(standard);
@@ -52,11 +54,13 @@ public class StandardServiceImpl implements StandardService {
 	/**
 	 * 查询所有 
 	 */
+	@Cacheable("standard")
 	public List<Standard> findAll() {
 		return standardRespository.findAll();
 	}
 
 	@Override
+	@Cacheable(value="standard",key="#pageable.pageNumber+'_'+#pageable.pageSize")
 	public Page<Standard> pageQuery(Pageable pageable) {
 		return standardRespository.findAll(pageable);
 	}

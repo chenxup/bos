@@ -13,6 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @description:菜单
  */
@@ -41,6 +45,13 @@ public class Menu {
 	@ManyToOne
 	@JoinColumn(name = "C_PID")
 	private Menu parentMenu;
+	
+	public Integer getpId(){
+		if (parentMenu == null) {
+			return 0;
+		}
+		return parentMenu.getId();
+	}
 
 	public int getId() {
 		return id;
@@ -82,6 +93,7 @@ public class Menu {
 		this.description = description;
 	}
 
+	@JSON(serialize=false)
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -90,6 +102,7 @@ public class Menu {
 		this.roles = roles;
 	}
 
+	@JSON(serialize=false)
 	public Set<Menu> getChildrenMenus() {
 		return childrenMenus;
 	}

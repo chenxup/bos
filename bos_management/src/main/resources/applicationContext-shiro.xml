@@ -5,6 +5,7 @@
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:amq="http://activemq.apache.org/schema/core" xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:cache="http://www.springframework.org/schema/cache"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
@@ -13,6 +14,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
 		http://www.springframework.org/schema/data/jpa
 		http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/cache
+		http://www.springframework.org/schema/cache/spring-cache.xsd
 		http://www.springframework.org/schema/jms
         http://www.springframework.org/schema/jms/spring-jms.xsd
 		http://activemq.apache.org/schema/core
@@ -43,11 +46,15 @@
 		</property>
 	</bean>
 	<!-- 自定义realm -->
-	<bean id="realm" class="cn.itcast.bos.realm.BosRelam"></bean>
+	<bean id="realm" class="cn.itcast.bos.realm.BosRelam">
+		<!-- 缓存区的名字就是ehcache.xml 自定义cache的name -->
+		<property name="authorizationCacheName" value="bos"></property>
+	</bean>
 	
 	<!-- 配置安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="realm"></property>
+		<property name="cacheManager" ref="shiroCacheManager"></property>
 	</bean>
 	
 	<!-- 对安全管理器 增强代码 ， spring 后处理器 -->
@@ -63,7 +70,23 @@
 		<property name="securityManager" ref="securityManager" />
 	</bean>
 	
-
-
+	<!-- 添加缓存管理 -->
+	<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml"></property>
+	</bean>
+	
+	<!-- shiro的缓存管理器 -->
+	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<!-- 注入缓存配置文件 -->
+		<property name="cacheManager" ref="ehCacheManager"></property>
+	</bean>
+	
+	<!-- spring缓存管理器 -->
+	<bean id="springCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="ehCacheManager"></property>
+	</bean>
+	
+	<!-- 开启缓存注解 -->
+	<cache:annotation-driven cache-manager="springCacheManager"/>
 
 </beans>
