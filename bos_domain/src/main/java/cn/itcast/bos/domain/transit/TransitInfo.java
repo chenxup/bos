@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.apache.struts2.json.annotations.JSON;
 
 import cn.itcast.bos.domain.take_delivery.WayBill;
 
@@ -49,6 +52,28 @@ public class TransitInfo {
 
 	@Column(name = "C_OUTLET_ADDRESS")
 	private String outletAddress;
+	
+    @Transient//表示不会生成数据库表的列
+	public String getTransferInfo(){
+		StringBuffer buffer = new StringBuffer();
+		// 添加出入库信息
+		if(inOutStorageInfos != null && inOutStorageInfos.size()>0){
+			// 添加出入库信息
+			for(InOutStorageInfo inOutStorageInfo:inOutStorageInfos){
+				buffer.append(inOutStorageInfo.getDescription() + "<br/>");
+			}
+		}
+		// 添加配送信息
+		if(deliveryInfo != null){
+			buffer.append(deliveryInfo.getDescription() + "<br/>");
+		}
+		// 添加签收信息
+		if(signInfo != null){
+			buffer.append(signInfo.getDescription() + "<br/>");
+		}
+		return buffer.toString();
+	}
+
 
 	public Integer getId() {
 		return id;
